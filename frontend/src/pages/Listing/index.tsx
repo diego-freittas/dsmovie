@@ -29,7 +29,7 @@ function Listing() {
                 const data = response.data as MoviePage;
                 setPage(data);
             });
-    }, [pageNumber])
+    }, [pageNumber]);
 
     const handlePagChange = (newPageNumber : number) => {
         setPegeNumber(newPageNumber);
