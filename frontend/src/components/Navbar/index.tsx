@@ -8,10 +8,10 @@ function Navbar() {
             <nav className="container">
                 <div className="dsmovie-nav-content">
                     <h1>DSMovie</h1>
-                    <a href="https://github.com/devsuperior">
+                    <a href="https://github.com/diego-freittas">
                         <div className="dsmovie-contact-container">
                             <GithubIcon />
-                            <p className="dsmovie-contact-link">/devsuperior</p>
+                            <p className="dsmovie-contact-link">Diego Freitas</p>
                         </div>
                     </a>
                 </div>
