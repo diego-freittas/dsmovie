@@ -1,16 +1,15 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
 import MovieCard from "components/MovieCard";
 import Pagination from "components/Pagination";
-import { useState, useEffect } from "react";
-import { MoviePage } from "types/movie";
 import { BASE_URL } from "utils/requests";
+import { MoviePage } from "types/movie";
 
 function Listing() {
 
-    const [pageNumber, setPegeNumber] = useState(0);
+    const [pageNumber, setPageNumber] = useState(0);
 
     const [page, setPage] = useState<MoviePage>({
-
         content: [],
         last: true,
         totalPages: 0,
@@ -20,37 +19,36 @@ function Listing() {
         first: true,
         numberOfElements: 0,
         empty: true
-
     });
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/movies?size=12&page=${pageNumber}&sort=id`)
+        axios.get(`${BASE_URL}/movies?size=12&page=${pageNumber}&sort=title`)
             .then(response => {
                 const data = response.data as MoviePage;
                 setPage(data);
             });
     }, [pageNumber]);
 
-    const handlePagChange = (newPageNumber : number) => {
-        setPegeNumber(newPageNumber);
+    const handlePageChange = (newPageNumber : number) => {
+        setPageNumber(newPageNumber);
     }
 
     return (
         <>
-            <Pagination  page={page} onChange={handlePagChange}/>
+            <Pagination page={page} onChange={handlePageChange} />
+
             <div className="container">
                 <div className="row">
-                    {page.content.map(itemMovie => (
-                        <div key={itemMovie.id} className="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                            <MovieCard movie={itemMovie} />
+                    {page.content.map(movie => (
+                        <div key={movie.id} className="col-sm-6 col-lg-4 col-xl-3 mb-3">
+                            <MovieCard movie={movie} />
                         </div>
                     )
                     )}
                 </div>
-
             </div>
         </>
-
     );
 }
+
 export default Listing;
